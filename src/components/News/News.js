@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { getNews } from '../../Api/Api';
+import { connect } from 'react-redux';
+import { NewsTemplate } from './NewsTemplate';
+import { setNews } from '../../Store';
 
-export const News = () => {
-  const [news, setNews] = useState([]);
-  
-  useEffect(() => {
-    const newsFromServer = getNews();
-    newsFromServer.then(news => {
-      setNews(news);
-    })
-  })
+const mapStateToProps = state => ({
+  news: state.news,
+});
 
-  console.log(news);
-  
-  return (
-    <div class="card">
-      <div class="card-header">
-        Featured
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  );
-};
+const mapDispatchToProps = dispatch => ({
+  setNews: payload => dispatch(setNews(payload)),
+});
+
+export const News = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(NewsTemplate);

@@ -1,43 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
+import { store } from '../Store';
 import './App.css';
-import { Navbar } from '../components/Navbar/Navbar';
-import { Home } from '../components/Home/Home';
-import { Login } from '../components/Login/Login';
-import { News } from '../components/News/News';
-import { Profile } from '../components/Profile/Profile';
-import firebase from '../Api/Firebase';
+import { Navbar } from '../components/Navbar';
+import { Home } from '../components/Home';
+import { Login } from '../components/Login';
+import { News } from '../components/News';
+import { Profile } from '../components/Profile';
 
-export const App = () => {
-  const [firebaseInit, setFirebaseInit] = useState(false);
-
-  useEffect(() => {
-    firebase.isInitialized().then(val=> {
-      setFirebaseInit(val)
-    })
-  })
-
-  return firebaseInit ? (
+export const App = () => (
+  <Provider store={store}>
     <Router>
       <Navbar />
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/news">
-          <News />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-      </Switch>
+      <main className="main">
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/news">
+            <News />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+        </Switch>
+      </main>
     </Router>
-  ) : <p>Initializing firebase</p>;
-};
+  </Provider>
+);

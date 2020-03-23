@@ -1,7 +1,12 @@
-import React from 'react';
+import { connect } from 'react-redux';
 
-export const Profile = () => {
-  return (
-    <h2>Its a profile page</h2>
-  );
-};
+import { ProfileTemplate } from './ProfileTemplate';
+
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn,
+});
+
+export const Profile = connect(
+  mapStateToProps,
+  null,
+)(ProfileTemplate);
