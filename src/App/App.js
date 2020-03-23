@@ -19,16 +19,16 @@ export const App = () => (
       <Navbar />
       <main className="main">
         <Switch>
-          <Route path="/test-task-1/" exact>
+          <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="test-task-1//news">
+          <Route path="/news">
             <News />
           </Route>
-          <Route path="test-task-1//login">
+          <Route path="/login">
             <Login />
           </Route>
-          <Route path="test-task-1//profile">
+          <Route path="/profile">
             <Profile />
           </Route>
         </Switch>
